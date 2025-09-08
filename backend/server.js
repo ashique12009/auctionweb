@@ -9,8 +9,8 @@ app.use(express.json());
 
 // View engine setup
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, "public")));
-app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "src", "public")));
+app.set("views", path.join(__dirname, "src", "views"));
 
 app.get("/", (req, res) => {
     res.render("login");
