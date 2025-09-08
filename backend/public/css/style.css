@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+  background: #f4f7fb;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #222;
+}
+h1 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+label {
+  display: block;
+  margin-top: 0.6rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.25rem;
+  border: 1px solid #e3e8ee;
+  border-radius: 7px;
+}
+button {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: #0b76ff;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.error {
+  background: #fff0f0;
+  color: #8b1b1b;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+.muted {
+  margin-top: 0.75rem;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Login page */
+.login-form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(12, 20, 30, 0.08);
+}
+.login-form{
+  width: 300px;
+}
