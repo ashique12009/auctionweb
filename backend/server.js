@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const { errorHandler } = require('./src/middlewares/error.middleware');
 const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
@@ -17,11 +18,7 @@ app.get("/", (req, res) => {
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    //res.status(500).send("Something broke!");
-    res.status(500).send(err.message); // shows the real error
-});
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
