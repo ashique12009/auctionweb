@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
+const errorHandler = require('./src/middlewares/error.middleware');
+const routes = require('./src/routes');
 const app = express();
-const { errorHandler } = require('./src/middlewares/error.middleware');
 const PORT = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
@@ -12,6 +13,9 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "src", "public")));
 app.set("views", path.join(__dirname, "src", "views"));
+
+// Use routes
+app.use("", routes);
 
 app.get("/", (req, res) => {
     res.render("login");
