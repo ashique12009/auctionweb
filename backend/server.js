@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 const errorHandler = require('./src/middlewares/error.middleware');
 const routes = require('./src/routes');
 const app = express();
