@@ -6,7 +6,6 @@ async function seedAdminUser() {
     try {
         // Admin user details
         const admin = {
-            username: "admin",
             email: "admin@example.com",
             password: "Admin@123", // plaintext (will be hashed)
             first_name: "System",
@@ -22,17 +21,16 @@ async function seedAdminUser() {
         // Insert query
         const query = `
             INSERT INTO users 
-            (username, email, password_hash, first_name, last_name, phone, address, role, created_at, last_login) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NULL)
+            (email, password_hash, first_name, last_name, phone, address, role, created_at, last_login) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NULL)
             ON DUPLICATE KEY UPDATE 
             email = VALUES(email), 
             password_hash = VALUES(password_hash), 
             role = VALUES(role), 
-            updated_at = NOW()
+            created_at = NOW()
         `;
 
         await promisePool.query(query, [
-            admin.username,
             admin.email,
             passwordHash,
             admin.first_name,
