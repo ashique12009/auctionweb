@@ -14,8 +14,6 @@ router.post("/login", async (req, res) => {
             [email]
         );
 
-        console.log('rows', rows);
-
         if (rows.length === 0) {
             return res.render("login", { error: "Invalid username or password" });
         }

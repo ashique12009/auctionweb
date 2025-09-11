@@ -66,3 +66,8 @@ button {
 .login-form{
   width: 300px;
 }
+
+/* Common */
+.txt-center {
+  text-align: center;
+}

@@ -30,10 +30,6 @@ app.set("views", path.join(__dirname, "src", "views"));
 // Use routes
 app.use("", routes);
 
-app.get(["/", "/login"], (req, res) => {
-    res.render("login");
-});
-
 // Error handling middleware
 app.use(errorHandler);
 
