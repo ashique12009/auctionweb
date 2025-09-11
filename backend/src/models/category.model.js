@@ -20,4 +20,9 @@ async function createCategoryTable() {
     }
 }
 
-module.exports = { createCategoryTable };
+async function countCategories() {
+    const [row] = await promisePool.query("SELECT COUNT(*) AS total FROM categories");
+    return row[0].total;
+}
+
+module.exports = { createCategoryTable, countCategories };
