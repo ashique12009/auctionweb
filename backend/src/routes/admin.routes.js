@@ -10,4 +10,12 @@ router.get('/dashboard', (req, res) => {
     res.render('dashboard', { title: 'Admin Dashboard' });
 });
 
+// Product Categories route
+router.get('/product-category', (req, res) => {
+    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
+        return res.redirect('/login');
+    }
+    res.render('product-category', { title: 'Product Categories' });
+});
+
 module.exports = router;
