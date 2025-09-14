@@ -1,11 +1,13 @@
 require("dotenv").config();
 const { createUserTable } = require("../src/models/user.model");
 const { createCategoryTable } = require("../src/models/category.model");
+const { createProductsTable } = require("../src/models/product.model");
 
 async function migrate() {
     try {
         await createUserTable();
         await createCategoryTable();
+        await createProductsTable();
         console.log("✅ Migration completed successfully");
         process.exit(0);
     } catch (err) {

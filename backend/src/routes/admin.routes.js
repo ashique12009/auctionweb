@@ -4,13 +4,14 @@ const { countCategories } = require('../models/category.model');
 
 // Dashboard route
 router.get('/dashboard', async (req, res) => {
-    console.log('req.session', req.session);
     if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
         return res.redirect('/login');
     }
 
     // Fetch total categories count
     const categoryCount = await countCategories();
+
+    // Fetch product count
 
     res.render('dashboard', { title: 'Admin Dashboard', categoryCount });
 });
