@@ -8,9 +8,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const session = require('express-session');
 
+// Dependencies
+const flash = require('connect-flash');
+const cookieParser = require('cookie-parser');
+// express-toastr
+const toastr = require('express-toastr');
+
 // Middleware to parse JSON bodies
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+app.use(cookieParser('secret'));
 
 // Session setup
 app.use(
@@ -21,6 +29,10 @@ app.use(
         cookie: { secure: false } // Set to true if using HTTPS
     })
 );
+
+// Flash messages
+app.use(flash());
+app.use(toastr());
 
 // View engine setup
 app.set("view engine", "ejs");

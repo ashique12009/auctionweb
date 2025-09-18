@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { countCategories } = require('../models/category.model');
+const { countProducts } = require('../models/product.model');
 
 // Dashboard route
 router.get('/dashboard', async (req, res) => {
@@ -12,8 +13,10 @@ router.get('/dashboard', async (req, res) => {
     const categoryCount = await countCategories();
 
     // Fetch product count
+    const productCount = await countProducts();
 
-    res.render('dashboard', { title: 'Admin Dashboard', categoryCount });
+    req.toastr.success('Welcome to the Admin Dashboard!', 'Auction Web');
+    res.render('dashboard', { title: 'Admin Dashboard', categoryCount, productCount, req });
 });
 
 // Product Categories route
