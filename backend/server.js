@@ -33,12 +33,7 @@ app.use(flash());
 
 // expose flash messages to all views as `flash`
 app.use((req, res, next) => {
-    res.locals.flash = {
-        success: req.flash('success'),
-        error: req.flash('error'),
-        info: req.flash('info'),
-        warning: req.flash('warning')
-    };
+    res.locals.flash = req.flash();
     next();
 });
 

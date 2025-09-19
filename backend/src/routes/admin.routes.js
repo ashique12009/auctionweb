@@ -56,6 +56,16 @@ router.get('/product-category', async (req, res) => {
     });
 });
 
+// Delete category
+router.post('/product-category/delete/:id', async (req, res) => {
+    await categoryModel.deleteCategory(req.params.id);
+    res.locals.flash = { success: ['Category deleted successfully'] };
+
+    req.flash('success', 'Category deleted successfully');
+
+    res.redirect('/admin/product-category');
+});
+
 // Product route
 router.get('/product', async (req, res) => {
     if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
