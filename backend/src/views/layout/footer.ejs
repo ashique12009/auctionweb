@@ -1,11 +1,13 @@
 <footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <!-- Use express-toastr assets -->
-  <link rel="stylesheet" href="/toastr.css">
-  <script src="/toastr.js"></script>
-
-  <%- req.toastr.render() %>
+  <script>
+    // Show all toasts automatically
+    document.querySelectorAll('.toast').forEach(toastEl => {
+      const t = new bootstrap.Toast(toastEl, { delay: 4000 });
+      t.show();
+    });
+  </script>
 </footer>
 </body>
 </html>

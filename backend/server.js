@@ -11,11 +11,9 @@ const session = require('express-session');
 // Dependencies
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
-// express-toastr
-const toastr = require('express-toastr');
 
 // Middleware to parse JSON bodies
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cookieParser('secret'));
@@ -32,7 +30,17 @@ app.use(
 
 // Flash messages
 app.use(flash());
-app.use(toastr());
+
+// expose flash messages to all views as `flash`
+app.use((req, res, next) => {
+    res.locals.flash = {
+        success: req.flash('success'),
+        error: req.flash('error'),
+        info: req.flash('info'),
+        warning: req.flash('warning')
+    };
+    next();
+});
 
 // View engine setup
 app.set("view engine", "ejs");

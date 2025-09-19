@@ -15,8 +15,8 @@ router.get('/dashboard', async (req, res) => {
     // Fetch product count
     const productCount = await countProducts();
 
-    req.toastr.success('Welcome to the Admin Dashboard!', 'Auction Web');
-    res.render('dashboard', { title: 'Admin Dashboard', categoryCount, productCount, req });
+    // req.flash('success', 'Welcome to the Admin Dashboard!');
+    res.render('dashboard', { title: 'Admin Dashboard', categoryCount, productCount, flash: { success: ['Welcome to the Admin Dashboard!'] } });
 });
 
 // Product Categories route
