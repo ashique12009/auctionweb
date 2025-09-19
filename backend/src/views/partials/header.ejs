@@ -27,16 +27,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/admin/product-category">Product Category</a>
+              <a class="nav-link <%= activePage === 'product-category' ? 'active' : '' %>" aria-current="page" href="/admin/product-category">Product Category</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Product</a>
+              <a class="nav-link <%= activePage === 'product' ? 'active' : '' %>" href="/admin/product">Product</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Seller</a>
+              <a class="nav-link <%= activePage === 'seller' ? 'active' : '' %>" href="/admin/seller">Seller</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Buyer</a>
+              <a class="nav-link <%= activePage === 'buyer' ? 'active' : '' %>" href="/admin/buyer">Buyer</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/logout">Logout</a>

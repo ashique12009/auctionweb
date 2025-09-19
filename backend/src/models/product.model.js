@@ -34,4 +34,21 @@ async function countProducts() {
     return row[0].total;
 }
 
-module.exports = { createProductsTable, countProducts };
+async function getProducts(search = '') {
+    let query = "SELECT * FROM products";
+    const params = [];
+
+    if (search) {
+        query += " WHERE title LIKE ?";
+        params.push(`%${search}%`);
+    }
+
+    const [rows] = await promisePool.query(query, params);
+    return rows;
+}
+
+module.exports = { 
+    createProductsTable, 
+    countProducts, 
+    getProducts
+};
