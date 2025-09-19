@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { countCategories } = require('../models/category.model');
+const categoryModel = require('../models/category.model');
 const { countProducts } = require('../models/product.model');
 const { countSeller } = require('../models/user.model');
 const { countBuyer } = require('../models/user.model');
@@ -12,7 +12,7 @@ router.get('/dashboard', async (req, res) => {
     }
 
     // Fetch total categories count
-    const categoryCount = await countCategories();
+    const categoryCount = await categoryModel.countCategories();
 
     // Fetch product count
     const productCount = await countProducts();
@@ -28,11 +28,15 @@ router.get('/dashboard', async (req, res) => {
 });
 
 // Product Categories route
-router.get('/product-category', (req, res) => {
+router.get('/product-category', async (req, res) => {
     if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
         return res.redirect('/login');
     }
-    res.render('product-category', { title: 'Product Categories' });
+
+    const search = req.query.search || '';
+    const categories = await categoryModel.getCategories(search);
+
+    res.render('product-category', { title: 'Product Categories', categories, search });
 });
 
 module.exports = router;
