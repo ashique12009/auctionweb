@@ -25,4 +25,14 @@ async function createUserTable() {
     }
 }
 
-module.exports = { createUserTable };
+async function countSeller() {
+    const [row] = await promisePool.query("SELECT COUNT(*) AS total FROM users WHERE role = 'seller'");
+    return row[0].total;
+}
+
+async function countBuyer() {
+    const [row] = await promisePool.query("SELECT COUNT(*) AS total FROM users WHERE role = 'buyer'");
+    return row[0].total;
+}
+
+module.exports = { createUserTable, countSeller, countBuyer };

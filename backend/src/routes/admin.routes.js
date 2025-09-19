@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { countCategories } = require('../models/category.model');
 const { countProducts } = require('../models/product.model');
+const { countSeller } = require('../models/user.model');
+const { countBuyer } = require('../models/user.model');
 
 // Dashboard route
 router.get('/dashboard', async (req, res) => {
@@ -15,8 +17,14 @@ router.get('/dashboard', async (req, res) => {
     // Fetch product count
     const productCount = await countProducts();
 
+    // Fetch seller count
+    const sellerCount = await countSeller();
+
+    // Fetch buyer count
+    const buyerCount = await countBuyer();
+
     // req.flash('success', 'Welcome to the Admin Dashboard!');
-    res.render('dashboard', { title: 'Admin Dashboard', categoryCount, productCount, flash: { success: ['Welcome to the Admin Dashboard!'] } });
+    res.render('dashboard', { title: 'Admin Dashboard', categoryCount, productCount, sellerCount, buyerCount, flash: { success: ['Welcome to the Admin Dashboard!'] } });
 });
 
 // Product Categories route
