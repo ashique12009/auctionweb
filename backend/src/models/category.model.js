@@ -49,10 +49,24 @@ async function updateCategory(id, name, parentId = null) {
     await promisePool.query(query, [name, parentId || null, id]);
 }
 
+async function getCategoryById(id) {
+    const query = "SELECT * FROM categories WHERE category_id = ?";
+    const [rows] = await promisePool.query(query, [id]);
+    return rows[0];
+}
+
+async function getCategories() {
+    const query = "SELECT * FROM categories";
+    const [rows] = await promisePool.query(query);
+    return rows;
+}
+
 module.exports = { 
     createCategoryTable, 
     countCategories, 
     getCategories, 
     deleteCategory, 
-    updateCategory 
+    updateCategory,
+    getCategoryById,
+    getCategories
 };

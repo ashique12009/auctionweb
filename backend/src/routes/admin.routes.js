@@ -25,7 +25,6 @@ router.get('/dashboard', async (req, res) => {
 
     res.locals.activePage = 'dashboard';
 
-    // req.flash('success', 'Welcome to the Admin Dashboard!');
     res.render('dashboard', { 
         title: 'Admin Dashboard', 
         categoryCount, 
@@ -33,13 +32,13 @@ router.get('/dashboard', async (req, res) => {
         sellerCount, 
         buyerCount, 
         flash: { 
-            success: ['Welcome to the Admin Dashboard!'] 
-        } 
+            success: ['Welcome to Admin Dashboard!'] 
+        }
     });
 });
 
 // Product Categories route
-router.get('/product-category', async (req, res) => {
+router.get('/category', async (req, res) => {
     if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
         return res.redirect('/login');
     }
@@ -47,23 +46,56 @@ router.get('/product-category', async (req, res) => {
     const search = req.query.search || '';
     const categories = await categoryModel.getCategories(search);
 
-    res.locals.activePage = 'product-category';
+    res.locals.activePage = 'category';
 
-    res.render('product-category', { 
-        title: 'Product Categories', 
+    res.render('category/category-list', { 
+        title: 'Categories', 
         categories, 
         search
     });
 });
 
 // Delete category
-router.post('/product-category/delete/:id', async (req, res) => {
+router.post('/category/delete/:id', async (req, res) => {
+    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
+        return res.redirect('/login');
+    }
+
     await categoryModel.deleteCategory(req.params.id);
     res.locals.flash = { success: ['Category deleted successfully'] };
 
     req.flash('success', 'Category deleted successfully');
 
-    res.redirect('/admin/product-category');
+    res.redirect('/admin/category');
+});
+
+// Edit category
+router.get('/category/edit/:id', async (req, res) => {
+    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
+        return res.redirect('/login');
+    }
+
+    res.locals.activePage = 'category';
+    
+    res.render('category/category-edit', { 
+        title: 'Edit Category', 
+        category: await categoryModel.getCategoryById(req.params.id), 
+        categories: await categoryModel.getCategories() 
+    });
+});
+
+// Update category
+router.post('/category/update/:id', async (req, res) => {
+    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
+        return res.redirect('/login');
+    }
+    
+    const { category_name, parent_category_id } = req.body;
+    await categoryModel.updateCategory(req.params.id, category_name, parent_category_id || null);
+
+    req.flash('success', 'Category updated successfully');
+
+    res.redirect('/admin/category');
 });
 
 // Product route
