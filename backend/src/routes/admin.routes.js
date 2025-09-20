@@ -113,14 +113,22 @@ router.post('/category/update/:id', async (req, res) => {
 // Product route
 router.get('/product', async (req, res) => {
     const search = req.query.search || '';
-    const products = await productModel.getProducts(search);
+    const currentPage = parseInt(req.query.currentPage) || 1;
+    const limit = 3; // rows per page
+    const offset = (currentPage - 1) * limit;
+
+    const products = await productModel.getProducts(search, limit, offset);
+    const totalProducts = await productModel.getProductsCount(search);
+    const totalPages = Math.ceil(totalProducts / limit);
 
     res.locals.activePage = 'product';
 
-    res.render('product', { 
+    res.render('product/product-list', { 
         title: 'Products', 
         products, 
-        search
+        search,
+        currentPage,
+        totalPages
     });
 });
 

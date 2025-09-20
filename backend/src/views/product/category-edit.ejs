@@ -1,0 +1,50 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Edit Category</h2>
+
+    <form method="POST" action="/admin/category/update/<%= category.category_id %>">
+        <!-- Category ID (read-only) -->
+        <div class="mb-3">
+            <label for="category_id" class="form-label">Category ID</label>
+            <input type="text" id="category_id" class="form-control" 
+                   value="<%= category.category_id %>" readonly>
+        </div>
+
+        <!-- Category Name -->
+        <div class="mb-3">
+            <label for="category_name" class="form-label">Category Name</label>
+            <input type="text" name="category_name" id="category_name" class="form-control" 
+                   value="<%= category.category_name %>" required>
+        </div>
+
+        <!-- Parent Category -->
+        <div class="mb-3">
+            <label for="parent_category_id" class="form-label">Parent Category</label>
+            <select name="parent_category_id" id="parent_category_id" class="form-select">
+                <option value="">-- None --</option>
+                <% categories.forEach(cat => { %>
+                    <option value="<%= cat.category_id %>" 
+                        <%= category.parent_category_id === cat.category_id ? "selected" : "" %>>
+                        <%= cat.category_name %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+
+        <!-- Created At (read-only) -->
+        <div class="mb-3">
+            <label for="created_at" class="form-label">Created At</label>
+            <input type="text" id="created_at" class="form-control" 
+                   value="<%= category.created_at.toISOString().slice(0,19).replace('T',' ') %>" readonly>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-success">Update</button>
+            <a href="/admin/category" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>
