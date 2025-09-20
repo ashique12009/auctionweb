@@ -4,13 +4,13 @@ const categoryModel = require('../models/category.model');
 const productModel = require('../models/product.model');
 const { countSeller } = require('../models/user.model');
 const { countBuyer } = require('../models/user.model');
+const adminAuth = require('../middlewares/adminAuth');
+
+// Apply adminAuth middleware to all routes in this router
+router.use(adminAuth);
 
 // Dashboard route
 router.get('/dashboard', async (req, res) => {
-    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
-        return res.redirect('/login');
-    }
-
     // Fetch total categories count
     const categoryCount = await categoryModel.countCategories();
 
@@ -39,10 +39,6 @@ router.get('/dashboard', async (req, res) => {
 
 // Product Categories route
 router.get('/category', async (req, res) => {
-    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
-        return res.redirect('/login');
-    }
-
     const search = req.query.search || '';
     const categories = await categoryModel.getCategories(search);
 
@@ -57,10 +53,6 @@ router.get('/category', async (req, res) => {
 
 // Delete category
 router.post('/category/delete/:id', async (req, res) => {
-    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
-        return res.redirect('/login');
-    }
-
     await categoryModel.deleteCategory(req.params.id);
     res.locals.flash = { success: ['Category deleted successfully'] };
 
@@ -71,10 +63,6 @@ router.post('/category/delete/:id', async (req, res) => {
 
 // Edit category
 router.get('/category/edit/:id', async (req, res) => {
-    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
-        return res.redirect('/login');
-    }
-
     res.locals.activePage = 'category';
     
     res.render('category/category-edit', { 
@@ -86,10 +74,6 @@ router.get('/category/edit/:id', async (req, res) => {
 
 // Update category
 router.post('/category/update/:id', async (req, res) => {
-    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
-        return res.redirect('/login');
-    }
-    
     const { category_name, parent_category_id } = req.body;
     await categoryModel.updateCategory(req.params.id, category_name, parent_category_id || null);
 
@@ -100,10 +84,6 @@ router.post('/category/update/:id', async (req, res) => {
 
 // Product route
 router.get('/product', async (req, res) => {
-    if (req.session === undefined || req.session.user === undefined || req.session.user.role !== 'admin') {
-        return res.redirect('/login');
-    }
-
     const search = req.query.search || '';
     const products = await productModel.getProducts(search);
 
