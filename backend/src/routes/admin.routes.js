@@ -59,6 +59,26 @@ router.get('/category', async (req, res) => {
     });
 });
 
+// Add category form
+router.get('/category/add', async (req, res) => {
+    res.locals.activePage = 'category';
+    
+    res.render('category/category-add', { 
+        title: 'Add Category', 
+        categories: await categoryModel.getAllCategories() 
+    });
+});
+
+// Handle add category
+router.post('/category/add', async (req, res) => {
+    const { category_name, parent_category_id } = req.body;
+    await categoryModel.addCategory(category_name, parent_category_id || null);
+
+    req.flash('success', 'Category added successfully');
+
+    res.redirect('/admin/category');
+});
+
 // Delete category
 router.post('/category/delete/:id', async (req, res) => {
     await categoryModel.deleteCategory(req.params.id);

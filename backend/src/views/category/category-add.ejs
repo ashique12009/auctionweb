@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Add Category</h2>
+
+    <form method="POST" action="/admin/category/add">
+        <!-- Category Name -->
+        <div class="mb-3">
+            <label for="category_name" class="form-label">Category Name</label>
+            <input type="text" name="category_name" id="category_name" class="form-control" 
+                   placeholder="Enter category name" required>
+        </div>
+
+        <!-- Parent Category -->
+        <div class="mb-3">
+            <label for="parent_category_id" class="form-label">Parent Category</label>
+            <select name="parent_category_id" id="parent_category_id" class="form-select">
+                <option value="">-- None --</option>
+                <% categories.forEach(cat => { %>
+                    <option value="<%= cat.category_id %>"><%= cat.category_name %></option>
+                <% }) %>
+            </select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <a href="/admin/category" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>

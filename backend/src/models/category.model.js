@@ -41,6 +41,14 @@ async function getCategories(search = '', limit = 30, offset = 0) {
     return rows;
 }
 
+async function addCategory(name, parentId = null) {
+    const query = `
+        INSERT INTO categories (category_name, parent_category_id, created_at)
+        VALUES (?, ?, NOW())
+    `;
+    await promisePool.query(query, [name, parentId || null]);
+}
+
 async function deleteCategory(categoryId) {
     const query = "DELETE FROM categories WHERE category_id = ?";
     const [result] = await promisePool.query(query, [categoryId]);
@@ -85,5 +93,6 @@ module.exports = {
     updateCategory,
     getCategoryById,
     getAllCategories,
-    getCategoriesCount
+    getCategoriesCount,
+    addCategory
 };
