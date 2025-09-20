@@ -68,7 +68,7 @@ router.get('/category/edit/:id', async (req, res) => {
     res.render('category/category-edit', { 
         title: 'Edit Category', 
         category: await categoryModel.getCategoryById(req.params.id), 
-        categories: await categoryModel.getCategories() 
+        categories: await categoryModel.getAllCategories() 
     });
 });
 

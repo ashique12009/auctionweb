@@ -30,8 +30,8 @@ async function getCategories(search = '') {
     const params = [];
 
     if (search) {
-        query += " WHERE category_name LIKE ?";
-        params.push(`%${search}%`);
+        query += " WHERE LOWER(category_name) LIKE ?";
+        params.push(`%${search.toLowerCase()}%`);
     }
 
     const [rows] = await promisePool.query(query, params);
@@ -55,7 +55,7 @@ async function getCategoryById(id) {
     return rows[0];
 }
 
-async function getCategories() {
+async function getAllCategories() {
     const query = "SELECT * FROM categories";
     const [rows] = await promisePool.query(query);
     return rows;
@@ -68,5 +68,5 @@ module.exports = {
     deleteCategory, 
     updateCategory,
     getCategoryById,
-    getCategories
+    getAllCategories
 };

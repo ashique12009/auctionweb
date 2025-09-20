@@ -6,7 +6,7 @@ async function seedProducts() {
         // Sample products
         const products = [
             {
-                seller_id: 1, // make sure user_id=1 exists
+                seller_id: 2, // make sure user_id=2 exists
                 category_id: 1, // Electronics
                 title: "MacBook Pro 16-inch",
                 description: "Latest Apple MacBook Pro with M2 chip.",
@@ -30,7 +30,7 @@ async function seedProducts() {
                 status: "active"
             },
             {
-                seller_id: 1,
+                seller_id: 2, // make sure user_id=2 exists
                 category_id: 5, // Paintings (child of Art)
                 title: "Oil Painting on Canvas",
                 description: "Original oil painting, signed by artist.",
