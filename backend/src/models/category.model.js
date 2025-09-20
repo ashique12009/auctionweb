@@ -25,7 +25,7 @@ async function countCategories() {
     return row[0].total;
 }
 
-async function getCategories(search = '') {
+async function getCategories(search = '', limit = 30, offset = 0) {
     let query = "SELECT * FROM categories";
     const params = [];
 
@@ -33,6 +33,9 @@ async function getCategories(search = '') {
         query += " WHERE LOWER(category_name) LIKE ?";
         params.push(`%${search.toLowerCase()}%`);
     }
+
+    query += " ORDER BY created_at DESC LIMIT ? OFFSET ?";
+    params.push(limit, offset);
 
     const [rows] = await promisePool.query(query, params);
     return rows;
@@ -61,6 +64,19 @@ async function getAllCategories() {
     return rows;
 }
 
+async function getCategoriesCount(search = '') {
+    let query = "SELECT COUNT(*) AS total FROM categories";
+    const params = [];
+
+    if (search) {
+        query += " WHERE LOWER(category_name) LIKE ?";
+        params.push(`%${search.toLowerCase()}%`);
+    }
+
+    const [rows] = await promisePool.query(query, params);
+    return rows[0].total;
+}
+
 module.exports = { 
     createCategoryTable, 
     countCategories, 
@@ -68,5 +84,6 @@ module.exports = {
     deleteCategory, 
     updateCategory,
     getCategoryById,
-    getAllCategories
+    getAllCategories,
+    getCategoriesCount
 };

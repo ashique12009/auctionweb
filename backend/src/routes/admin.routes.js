@@ -39,15 +39,23 @@ router.get('/dashboard', async (req, res) => {
 
 // Product Categories route
 router.get('/category', async (req, res) => {
-    const search = req.query.search || '';
-    const categories = await categoryModel.getCategories(search);
+    const search = (req.query.search || '').trim();
+    const currentPage = parseInt(req.query.currentPage) || 1;
+    const limit = 3; // rows per page
+    const offset = (currentPage - 1) * limit;
+
+    const categories = await categoryModel.getCategories(search, limit, offset);
+    const totalCategories = await categoryModel.getCategoriesCount(search);
+    const totalPages = Math.ceil(totalCategories / limit);
 
     res.locals.activePage = 'category';
 
     res.render('category/category-list', { 
         title: 'Categories', 
         categories, 
-        search
+        search,
+        currentPage,
+        totalPages
     });
 });
 
