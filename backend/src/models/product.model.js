@@ -60,9 +60,18 @@ async function getProductsCount(search = '') {
     return rows[0].total;
 }
 
+async function addProduct(sellerId, categoryId, title, description, startingPrice, reservePrice = null, buyNowPrice = null, startTime, endTime) {
+    const query = `
+        INSERT INTO products (seller_id, category_id, title, description, starting_price, reserve_price, buy_now_price, start_time, end_time, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+    `;
+    await promisePool.query(query, [sellerId, categoryId, title, description, startingPrice, reservePrice || null, buyNowPrice || null, startTime, endTime]);
+}
+
 module.exports = { 
     createProductsTable, 
     countProducts, 
     getProducts,
-    getProductsCount
+    getProductsCount,
+    addProduct
 };

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const categoryModel = require('../models/category.model');
 const productModel = require('../models/product.model');
-const { countSeller } = require('../models/user.model');
+const userModel = require('../models/user.model');
 const { countBuyer } = require('../models/user.model');
 const adminAuth = require('../middlewares/adminAuth');
 
@@ -18,7 +18,7 @@ router.get('/dashboard', async (req, res) => {
     const productCount = await productModel.countProducts();
 
     // Fetch seller count
-    const sellerCount = await countSeller();
+    const sellerCount = await userModel.countSeller();
 
     // Fetch buyer count
     const buyerCount = await countBuyer();
@@ -32,7 +32,7 @@ router.get('/dashboard', async (req, res) => {
         sellerCount, 
         buyerCount, 
         flash: { 
-            success: ['Welcome to Admin Dashboard!'] 
+            success: ['Welcome to admin dashboard!'] 
         }
     });
 });
@@ -130,6 +130,30 @@ router.get('/product', async (req, res) => {
         currentPage,
         totalPages
     });
+});
+
+// Product add
+router.get('/product/add', async (req, res) => {
+    res.locals.activePage = 'product';
+    
+    res.render('product/product-add', { 
+        title: 'Add Product', 
+        categories: await categoryModel.getAllCategories(),
+        sellers: await userModel.getAllSellers()
+    });
+});
+
+// Handle add product
+router.post('/product/add', async (req, res) => {
+    const { seller_id, category_id, title, description, starting_price, reserve_price, buy_now_price, start_time, end_time } = req.body;
+    // Assuming seller_id is obtained from the logged-in admin user
+    // const seller_id = req.session.user.user_id; // Adjust based on your session structure
+
+    await productModel.addProduct(seller_id, category_id, title, description, starting_price, reserve_price || null, buy_now_price || null, start_time, end_time, category_id);
+
+    req.flash('success', 'Product added successfully');
+
+    res.redirect('/admin/product');
 });
 
 module.exports = router;
