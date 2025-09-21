@@ -1,0 +1,59 @@
+/* Main css */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/placeholder.svg?height=600&width=1200");
+  background-size: cover;
+  background-position: center;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.auction-card {
+  transition: transform 0.3s ease;
+}
+.auction-card:hover {
+  transform: translateY(-5px);
+}
+.live-badge {
+  background: #dc3545;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.footer-dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+.footer-link {
+  color: #cccccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer-link:hover {
+  color: #ffffff;
+}
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+.social-icon:hover {
+  background: #007bff;
+  color: #fff;
+}
