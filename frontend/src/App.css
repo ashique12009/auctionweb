@@ -57,3 +57,13 @@
   background: #007bff;
   color: #fff;
 }
+/* Custom */
+.text-light-white {
+  color: #f8f9fa;
+}
+.text-light-blue {
+  color: #0d6efd;
+}
+.btn-nav-link {
+  background-color: #758083;
+}

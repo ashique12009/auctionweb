@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
@@ -10,7 +9,7 @@ function App() {
       <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
         <div className="container">
           <a className="navbar-brand fw-bold fs-3 text-primary" href="#">
-            <i className="fas fa-gavel me-2"></i>AuctionHub
+            <i className="fas fa-gavel me-2"></i>AuctionWeb
           </a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
@@ -33,7 +32,7 @@ function App() {
                 <a className="nav-link" href="#contact">Contact</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link btn btn-danger text-white px-3 ms-2" href="#live-auctions">
+                <a className="nav-link btn-nav-link btn btn-danger text-white px-3 ms-2" href="#live-auctions">
                   <i className="fas fa-circle me-1"></i>Live Auctions
                 </a>
               </li>
@@ -77,7 +76,7 @@ function App() {
           <div className="row g-4">
             <div className="col-md-6 col-lg-4">
               <div className="card auction-card h-100 shadow-sm">
-                <img src="/placeholder.svg?height=250&width=400" className="card-img-top" alt="Vintage Painting" />
+                <img src="https://placehold.co/400x250" className="card-img-top" alt="Vintage Painting" />
                 <div className="card-body">
                   <span className="badge bg-success mb-2">Live Now</span>
                   <h5 className="card-title">19th Century Oil Painting</h5>
@@ -97,7 +96,7 @@ function App() {
             </div>
             <div className="col-md-6 col-lg-4">
               <div className="card auction-card h-100 shadow-sm">
-                <img src="/placeholder.svg?height=250&width=400" className="card-img-top" alt="Antique Jewelry" />
+                <img src="https://placehold.co/400x250" className="card-img-top" alt="Antique Jewelry" />
                 <div className="card-body">
                   <span className="badge bg-success mb-2">Live Now</span>
                   <h5 className="card-title">Victorian Diamond Ring</h5>
@@ -117,7 +116,7 @@ function App() {
             </div>
             <div className="col-md-6 col-lg-4">
               <div className="card auction-card h-100 shadow-sm">
-                <img src="/placeholder.svg?height=250&width=400" className="card-img-top" alt="Vintage Watch" />
+                <img src="https://placehold.co/400x250" className="card-img-top" alt="Vintage Watch" />
                 <div className="card-body">
                   <span className="badge bg-warning text-dark mb-2">Starting Soon</span>
                   <h5 className="card-title">Vintage Rolex Submariner</h5>
@@ -153,7 +152,7 @@ function App() {
             <div className="col-md-6 col-lg-3">
               <div className="card text-center h-100 shadow-sm">
                 <div className="card-body">
-                  <img src="/placeholder.svg?height=100&width=100" className="mb-3" alt="Art" />
+                  <img src="https://placehold.co/100x100" className="mb-3" alt="Art" />
                   <h5 className="card-title">Fine Art</h5>
                   <p className="card-text">Paintings, sculptures, and contemporary art pieces</p>
                   <a href="#" className="btn btn-outline-primary">View Items</a>
@@ -163,7 +162,7 @@ function App() {
             <div className="col-md-6 col-lg-3">
               <div className="card text-center h-100 shadow-sm">
                 <div className="card-body">
-                  <img src="/placeholder.svg?height=100&width=100" className="mb-3" alt="Jewelry" />
+                  <img src="https://placehold.co/100x100" className="mb-3" alt="Jewelry" />
                   <h5 className="card-title">Jewelry</h5>
                   <p className="card-text">Rare gems, vintage pieces, and luxury accessories</p>
                   <a href="#" className="btn btn-outline-primary">View Items</a>
@@ -173,7 +172,7 @@ function App() {
             <div className="col-md-6 col-lg-3">
               <div className="card text-center h-100 shadow-sm">
                 <div className="card-body">
-                  <img src="/placeholder.svg?height=100&width=100" className="mb-3" alt="Antiques" />
+                  <img src="https://placehold.co/100x100" className="mb-3" alt="Antiques" />
                   <h5 className="card-title">Antiques</h5>
                   <p className="card-text">Historical artifacts and vintage collectibles</p>
                   <a href="#" className="btn btn-outline-primary">View Items</a>
@@ -183,7 +182,7 @@ function App() {
             <div className="col-md-6 col-lg-3">
               <div className="card text-center h-100 shadow-sm">
                 <div className="card-body">
-                  <img src="/placeholder.svg?height=100&width=100" className="mb-3" alt="Watches" />
+                  <img src="https://placehold.co/100x100" className="mb-3" alt="Watches" />
                   <h5 className="card-title">Watches</h5>
                   <p className="card-text">Luxury timepieces and vintage watch collections</p>
                   <a href="#" className="btn btn-outline-primary">View Items</a>
@@ -207,7 +206,7 @@ function App() {
           <div className="row g-4">
             <div className="col-md-6 col-lg-4">
               <div className="card auction-card h-100 shadow-sm">
-                <img src="/placeholder.svg?height=250&width=400" className="card-img-top" alt="Antique Vase" />
+                <img src="https://placehold.co/400x250" className="card-img-top" alt="Antique Vase" />
                 <div className="card-body">
                   <h5 className="card-title">Ming Dynasty Vase</h5>
                   <p className="card-text text-muted">Authentic 15th century ceramic masterpiece</p>
@@ -220,7 +219,7 @@ function App() {
             </div>
             <div className="col-md-6 col-lg-4">
               <div className="card auction-card h-100 shadow-sm">
-                <img src="/placeholder.svg?height=250&width=400" className="card-img-top" alt="Vintage Car" />
+                <img src="https://placehold.co/400x250" className="card-img-top" alt="Vintage Car" />
                 <div className="card-body">
                   <h5 className="card-title">1965 Ferrari 275 GTB</h5>
                   <p className="card-text text-muted">Rare classNameic sports car in pristine condition</p>
@@ -233,7 +232,7 @@ function App() {
             </div>
             <div className="col-md-6 col-lg-4">
               <div className="card auction-card h-100 shadow-sm">
-                <img src="/placeholder.svg?height=250&width=400" className="card-img-top" alt="Rare Book" />
+                <img src="https://placehold.co/400x250" className="card-img-top" alt="Rare Book" />
                 <div className="card-body">
                   <h5 className="card-title">First Edition Shakespeare</h5>
                   <p className="card-text text-muted">1623 First Folio in exceptional condition</p>
@@ -254,7 +253,7 @@ function App() {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6">
-              <h2 className="display-5 fw-bold mb-4">About AuctionHub</h2>
+              <h2 className="display-5 fw-bold mb-4">About AuctionWeb</h2>
               <p className="lead mb-4">For over 25 years, AuctionHub has been the premier destination for collectors, investors, and enthusiasts seeking authentic, high-quality items through our trusted auction platform.</p>
               <div className="row g-4 mb-4">
                 <div className="col-6">
@@ -285,7 +284,7 @@ function App() {
               <a href="#contact" className="btn btn-primary btn-lg">Learn More</a>
             </div>
             <div className="col-lg-6">
-              <img src="/placeholder.svg?height=400&width=600" className="img-fluid rounded shadow" alt="About Us" />
+              <img src="https://placehold.co/600x400" className="img-fluid rounded shadow" alt="About Us" />
             </div>
           </div>
         </div>
@@ -351,9 +350,9 @@ function App() {
           <div className="row g-4">
             <div className="col-lg-4">
               <h5 className="fw-bold mb-4">
-                <i className="fas fa-gavel me-2 text-primary"></i>AuctionHub
+                <i className="fas fa-gavel me-2 text-primary"></i>AuctionWeb
               </h5>
-              <p className="text-muted mb-4">Your premier destination for authentic auctions and rare collectibles. Join our community of collectors and discover extraordinary items from around the world.</p>
+              <p className="text-light-white mb-4">Your premier destination for authentic auctions and rare collectibles. Join our community of collectors and discover extraordinary items from around the world.</p>
               <div className="d-flex gap-3">
                 <a href="#" className="social-icon">
                   <i className="fab fa-facebook-f"></i>
@@ -404,7 +403,7 @@ function App() {
               <ul className="list-unstyled">
                 <li className="mb-2">
                   <i className="fas fa-map-marker-alt me-2 text-primary"></i>
-                  <small>123 Auction Street<br />New York, NY 10001</small>
+                  <small>123 Auction Street<br />Vantaa, HEL 10001</small>
                 </li>
                 <li className="mb-2">
                   <i className="fas fa-phone me-2 text-primary"></i>
@@ -412,7 +411,7 @@ function App() {
                 </li>
                 <li className="mb-2">
                   <i className="fas fa-envelope me-2 text-primary"></i>
-                  <small>info@auctionhub.com</small>
+                  <small>info@auctionweb.com</small>
                 </li>
               </ul>
             </div>
@@ -420,10 +419,10 @@ function App() {
           <hr className="my-4 border-secondary" />
           <div className="row align-items-center">
             <div className="col-md-6">
-              <p className="text-muted mb-0">&copy; 2024 AuctionHub. All rights reserved.</p>
+              <p className="text-light-white mb-0">&copy; 2025 AuctionWeb. All rights reserved.</p>
             </div>
             <div className="col-md-6 text-md-end">
-              <p className="text-muted mb-0">Designed with <i className="fas fa-heart text-danger"></i> for collectors worldwide</p>
+              <p className="text-light-white mb-0">Designed by <i className="fas fa-heart text-danger"></i> Kh Ashique Mahamud</p>
             </div>
           </div>
         </div>
