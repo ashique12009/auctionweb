@@ -3,7 +3,8 @@ const router = express.Router();
 const categoryModel = require('../models/category.model');
 const productModel = require('../models/product.model');
 const userModel = require('../models/user.model');
-const { countBuyer } = require('../models/user.model');
+const sellerModel = require('../models/seller.model');
+const buyerModel = require('../models/buyer.model');
 const adminAuth = require('../middlewares/adminAuth');
 
 // Apply adminAuth middleware to all routes in this router
@@ -18,10 +19,10 @@ router.get('/dashboard', async (req, res) => {
     const productCount = await productModel.countProducts();
 
     // Fetch seller count
-    const sellerCount = await userModel.countSeller();
+    const sellerCount = await sellerModel.countSeller();
 
     // Fetch buyer count
-    const buyerCount = await countBuyer();
+    const buyerCount = await buyerModel.countBuyer();
 
     res.locals.activePage = 'dashboard';
 
@@ -41,7 +42,7 @@ router.get('/dashboard', async (req, res) => {
 router.get('/category', async (req, res) => {
     const search = (req.query.search || '').trim();
     const currentPage = parseInt(req.query.currentPage) || 1;
-    const limit = 3; // rows per page
+    const limit = 30; // rows per page
     const offset = (currentPage - 1) * limit;
 
     const categories = await categoryModel.getCategories(search, limit, offset);
@@ -114,7 +115,7 @@ router.post('/category/update/:id', async (req, res) => {
 router.get('/product', async (req, res) => {
     const search = req.query.search || '';
     const currentPage = parseInt(req.query.currentPage) || 1;
-    const limit = 3; // rows per page
+    const limit = 30; // rows per page
     const offset = (currentPage - 1) * limit;
 
     const products = await productModel.getProducts(search, limit, offset);
@@ -139,7 +140,7 @@ router.get('/product/add', async (req, res) => {
     res.render('product/product-add', { 
         title: 'Add Product', 
         categories: await categoryModel.getAllCategories(),
-        sellers: await userModel.getAllSellers()
+        sellers: await sellerModel.getAllSellers()
     });
 });
 

@@ -407,7 +407,7 @@ function App() {
                 </li>
                 <li className="mb-2">
                   <i className="fas fa-phone me-2 text-primary"></i>
-                  <small>+1 (555) 123-4567</small>
+                  <small>+358 (417) 22-5533</small>
                 </li>
                 <li className="mb-2">
                   <i className="fas fa-envelope me-2 text-primary"></i>
