@@ -65,7 +65,19 @@ async function addProduct(sellerId, categoryId, title, description, startingPric
         INSERT INTO products (seller_id, category_id, title, description, starting_price, reserve_price, buy_now_price, start_time, end_time, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
     `;
-    await promisePool.query(query, [sellerId, categoryId, title, description, startingPrice, reservePrice || null, buyNowPrice || null, startTime, endTime]);
+    const [result] = await promisePool.query(query, [
+        sellerId, 
+        categoryId, 
+        title, 
+        description, 
+        startingPrice, 
+        reservePrice || null, 
+        buyNowPrice || null, 
+        startTime, 
+        endTime
+    ]);
+
+    return result.insertId;
 }
 
 module.exports = { 

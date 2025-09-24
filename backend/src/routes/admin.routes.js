@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const categoryModel = require('../models/category.model');
 const productModel = require('../models/product.model');
+const productImageModel = require('../models/productImage.model');
 const userModel = require('../models/user.model');
 const sellerModel = require('../models/seller.model');
 const buyerModel = require('../models/buyer.model');
 const adminAuth = require('../middlewares/adminAuth');
+const upload = require('../middlewares/upload');
 
 // Apply adminAuth middleware to all routes in this router
 router.use(adminAuth);
@@ -145,12 +147,21 @@ router.get('/product/add', async (req, res) => {
 });
 
 // Handle add product
-router.post('/product/add', async (req, res) => {
+router.post('/product/add', upload.array('images', 3), async (req, res) => {
     const { seller_id, category_id, title, description, starting_price, reserve_price, buy_now_price, start_time, end_time } = req.body;
     // Assuming seller_id is obtained from the logged-in admin user
     // const seller_id = req.session.user.user_id; // Adjust based on your session structure
 
-    await productModel.addProduct(seller_id, category_id, title, description, starting_price, reserve_price || null, buy_now_price || null, start_time, end_time, category_id);
+    const productId = await productModel.addProduct(seller_id, category_id, title, description, starting_price, reserve_price || null, buy_now_price || null, start_time, end_time, category_id);
+
+    // Handle file uploads
+    if (req.files && req.files.length > 0) {
+        for (const file of req.files) {
+            // Store relative URL for frontend
+            const imageUrl = `/uploads/${file.filename}`;
+            await productImageModel.addImage(productId, imageUrl);
+        }
+    }
 
     req.flash('success', 'Product added successfully');
 
