@@ -3,7 +3,13 @@
 <div class="container mt-5">
     <h2 class="mb-4">Add Product</h2>
 
-    <form method="POST" action="/admin/product/add">
+    <form method="POST" action="/admin/product/add" enctype="multipart/form-data">
+        <!-- Product Images -->
+        <div class="mb-3">
+            <label for="images" class="form-label">Product Images</label>
+            <input type="file" name="images" id="images" class="form-control" multiple accept="image/*">
+        </div>
+
         <!-- Seller ID -->
         <div class="mb-3">
             <label for="seller_id" class="form-label">Seller</label>

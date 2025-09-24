@@ -38,7 +38,7 @@ router.get('/dashboard', async (req, res) => {
     });
 });
 
-// Product Categories route
+//*************** Product category route ******************
 router.get('/category', async (req, res) => {
     const search = (req.query.search || '').trim();
     const currentPage = parseInt(req.query.currentPage) || 1;
@@ -111,7 +111,7 @@ router.post('/category/update/:id', async (req, res) => {
     res.redirect('/admin/category');
 });
 
-// Product route
+//*************** Product route ******************
 router.get('/product', async (req, res) => {
     const search = req.query.search || '';
     const currentPage = parseInt(req.query.currentPage) || 1;
