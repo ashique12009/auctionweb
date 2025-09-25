@@ -191,4 +191,19 @@ router.get('/product/view/:id', async (req, res) => {
     });
 });
 
+// Product edit
+router.get('/product/edit/:id', async (req, res) => {
+    res.locals.activePage = 'product';
+    
+    res.render('product/product-edit', { 
+        title: 'Edit Product', 
+        product: await productModel.getProductById(req.params.id), 
+        categories: await categoryModel.getAllCategories(),
+        sellers: await sellerModel.getAllSellers(),
+        images: await productImageModel.getImagesByItemId(req.params.id)
+    });
+});
+
+// Handle product update
+
 module.exports = router;
