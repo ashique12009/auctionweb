@@ -86,11 +86,34 @@ async function getProductById(productId) {
     return rows[0];
 }
 
+async function updateProduct(productId, sellerId, categoryId, title, description, startingPrice, reservePrice = null, buyNowPrice = null, startTime, endTime) {
+    const query = `
+        UPDATE products 
+        SET seller_id = ?, category_id = ?, title = ?, description = ?, starting_price = ?, reserve_price = ?, buy_now_price = ?, start_time = ?, end_time = ?
+        WHERE item_id = ?
+    `;
+    const [result] = await promisePool.query(query, [
+        sellerId,
+        categoryId, 
+        title, 
+        description, 
+        startingPrice, 
+        reservePrice || null, 
+        buyNowPrice || null, 
+        startTime, 
+        endTime,
+        productId
+    ]);
+
+    return result.affectedRows > 0;
+}
+
 module.exports = { 
     createProductsTable, 
     countProducts, 
     getProducts,
     getProductsCount,
     addProduct,
-    getProductById
+    getProductById,
+    updateProduct
 };

@@ -205,5 +205,25 @@ router.get('/product/edit/:id', async (req, res) => {
 });
 
 // Handle product update
+router.post('/product/edit/:id', upload.array('images', 3), async (req, res) => {
+    const { seller_id, category_id, title, description, starting_price, reserve_price, buy_now_price, start_time, end_time } = req.body;
+    // Assuming seller_id is obtained from the logged-in admin user
+    // const seller_id = req.session.user.user_id; // Adjust based on your session structure
+
+    await productModel.updateProduct(req.params.id, seller_id, category_id, title, description, starting_price, reserve_price || null, buy_now_price || null, start_time, end_time);
+
+    // Handle file uploads
+    if (req.files && req.files.length > 0) {
+        for (const file of req.files) {
+            // Store relative URL for frontend
+            const imageUrl = `/uploads/${file.filename}`;
+            await productImageModel.addImage(req.params.id, imageUrl);
+        }
+    }
+
+    req.flash('success', 'Product updated successfully');
+
+    res.redirect('/admin/product');
+});
 
 module.exports = router;
