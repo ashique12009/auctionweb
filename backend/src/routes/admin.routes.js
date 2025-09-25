@@ -178,4 +178,17 @@ router.post('/product/add', upload.array('images', 3), async (req, res) => {
     res.redirect('/admin/product');
 });
 
+// Product details
+router.get('/product/view/:id', async (req, res) => {
+    res.locals.activePage = 'product';
+    
+    res.render('product/product-view', { 
+        title: 'Product Details', 
+        product: await productModel.getProductById(req.params.id), 
+        categories: await categoryModel.getAllCategories(),
+        sellers: await sellerModel.getAllSellers(),
+        images: await productImageModel.getImagesByItemId(req.params.id)
+    });
+});
+
 module.exports = router;

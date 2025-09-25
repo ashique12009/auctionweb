@@ -1,0 +1,97 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5">
+    <h2 class="mb-4"><%= title %></h2>
+
+    <!-- Product Images -->
+    <% if (images && images.length > 0) { %>
+        <ul class="list-unstyled d-flex gap-3 mb-4">
+            <% images.forEach((img) => { %>
+                <li><img src="<%= img.image_url %>" class="d-block rounded" alt="Product Image" width="200"></li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p class="text-muted">No images uploaded for this product.</p>
+    <% } %>
+
+    <!-- Product Details -->
+    <table class="table table-bordered">
+        <tr>
+            <th>Product ID</th>
+            <td><%= product.product_id %></td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td><%= product.title %></td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td><%= product.description || '-' %></td>
+        </tr>
+        <tr>
+            <th>Seller</th>
+            <td>
+                <% 
+                    let seller = sellers.find(s => s.user_id === product.seller_id);
+                    if (seller) { 
+                %>
+                    <%= seller.first_name %> <%= seller.last_name %> (<%= seller.email %>)
+                <% } else { %>
+                    <span class="text-muted">Unknown Seller</span>
+                <% } %>
+            </td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>
+                <% 
+                    let category = categories.find(c => c.category_id === product.category_id);
+                    if (category) { 
+                %>
+                    <%= category.category_name %>
+                <% } else { %>
+                    <span class="text-muted">Uncategorized</span>
+                <% } %>
+            </td>
+        </tr>
+        <tr>
+            <th>Starting Price</th>
+            <td>$<%= product.starting_price %></td>
+        </tr>
+        <tr>
+            <th>Reserve Price</th>
+            <td><%= product.reserve_price ? '$' + product.reserve_price : '-' %></td>
+        </tr>
+        <tr>
+            <th>Buy Now Price</th>
+            <td><%= product.buy_now_price ? '$' + product.buy_now_price : '-' %></td>
+        </tr>
+        <tr>
+            <th>Start Time</th>
+            <td><%= new Date(product.start_time).toISOString().slice(0,19).replace('T',' ') %></td>
+        </tr>
+        <tr>
+            <th>End Time</th>
+            <td><%= new Date(product.end_time).toISOString().slice(0,19).replace('T',' ') %></td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+                <span class="badge 
+                    <%= product.status === 'active' ? 'bg-success' : 
+                        product.status === 'sold' ? 'bg-primary' :
+                        product.status === 'expired' ? 'bg-secondary' : 'bg-danger' %>">
+                    <%= product.status %>
+                </span>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Action Buttons -->
+    <div class="d-flex gap-3">
+        <a href="/admin/product/edit/<%= product.product_id %>" class="btn btn-warning">Edit</a>
+        <a href="/admin/product" class="btn btn-secondary">Back</a>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

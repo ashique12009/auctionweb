@@ -80,10 +80,17 @@ async function addProduct(sellerId, categoryId, title, description, startingPric
     return result.insertId;
 }
 
+async function getProductById(productId) {
+    const query = "SELECT * FROM products WHERE item_id = ?";
+    const [rows] = await promisePool.query(query, [productId]);
+    return rows[0];
+}
+
 module.exports = { 
     createProductsTable, 
     countProducts, 
     getProducts,
     getProductsCount,
-    addProduct
+    addProduct,
+    getProductById
 };
