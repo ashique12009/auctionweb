@@ -3,7 +3,6 @@ const router = express.Router();
 const categoryModel = require('../models/category.model');
 const productModel = require('../models/product.model');
 const productImageModel = require('../models/productImage.model');
-const userModel = require('../models/user.model');
 const sellerModel = require('../models/seller.model');
 const buyerModel = require('../models/buyer.model');
 const adminAuth = require('../middlewares/adminAuth');
@@ -80,6 +79,17 @@ router.post('/category/add', async (req, res) => {
     req.flash('success', 'Category added successfully');
 
     res.redirect('/admin/category');
+});
+
+// Show category details
+router.get('/category/view/:id', async (req, res) => {
+    res.locals.activePage = 'category';
+    
+    res.render('category/category-view', { 
+        title: 'Category Details', 
+        category: await categoryModel.getCategoryById(req.params.id), 
+        categories: await categoryModel.getAllCategories() 
+    });
 });
 
 // Delete category

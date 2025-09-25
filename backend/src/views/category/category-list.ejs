@@ -40,6 +40,19 @@
                         <td><%= cat.parent_category_id || "-" %></td>
                         <td><%= cat.created_at.toISOString().slice(0,19).replace('T',' ') %></td>
                         <td class="d-flex gap-2">
+                            <!-- Show Button -->
+                            <a href="/admin/category/view/<%= cat.category_id %>" 
+                                class="btn btn-sm btn-info">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+                                    class="bi bi-eye" viewBox="0 0 16 16">
+                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 
+                                            5.5 8 5.5S16 8 16 8zm-8 
+                                            3a3 3 0 1 1 0-6 3 3 0 0 
+                                            1 0 6z"/>
+                                    <path d="M8 5.5a2.5 2.5 0 1 0 
+                                            0 5 2.5 2.5 0 0 0 0-5z"/>
+                                </svg>
+                            </a>
                             <a href="/admin/category/edit/<%= cat.category_id %>" 
                                 class="btn btn-sm btn-warning">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
