@@ -30,8 +30,25 @@ async function getImagesByItemId(itemId) {
     return rows;
 }
 
+async function getImagePathByImageId(imageId) {
+    const [rows] = await promisePool.query(
+        "SELECT image_url FROM product_images WHERE image_id = ?",
+        [imageId]
+    );
+    return rows.length > 0 ? rows[0].image_url : null;
+}
+
+async function deleteImageByImageId(imageId) {
+    const query = `
+        DELETE FROM product_images WHERE image_id = ?
+    `;
+    await promisePool.query(query, [imageId]);
+}
+
 module.exports = {
     createProductImagesTable,
     addImage,
-    getImagesByItemId
+    getImagesByItemId,
+    deleteImageByImageId,
+    getImagePathByImageId
 };

@@ -5,9 +5,18 @@
 
     <!-- Product Images -->
     <% if (images && images.length > 0) { %>
-        <ul class="list-unstyled d-flex gap-3 mb-4">
+        <ul class="list-unstyled d-flex gap-3 mb-4 flex-wrap">
             <% images.forEach((img) => { %>
-                <li><img src="<%= img.image_url %>" class="d-block rounded" alt="Product Image" width="200"></li>
+                <li class="position-relative">
+                    <img src="<%= img.image_url %>" class="d-block rounded" alt="Product Image" width="200">
+
+                    <!-- Small cross button -->
+                    <form action="/admin/product/<%= product.item_id %>/image/<%= img.image_id %>/delete" method="POST" 
+                        class="position-absolute top-0 end-0">
+                        <button type="submit" class="btn btn-sm btn-danger" 
+                                style="border-radius: 50%; padding: 0.2rem 0.6rem;">×</button>
+                    </form>
+                </li>
             <% }) %>
         </ul>
     <% } else { %>

@@ -7,6 +7,8 @@ const sellerModel = require('../models/seller.model');
 const buyerModel = require('../models/buyer.model');
 const adminAuth = require('../middlewares/adminAuth');
 const upload = require('../middlewares/upload');
+const path = require('path');
+const fs = require('fs');
 
 // Apply adminAuth middleware to all routes in this router
 router.use(adminAuth);
@@ -224,6 +226,29 @@ router.post('/product/edit/:id', upload.array('images', 3), async (req, res) => 
     req.flash('success', 'Product updated successfully');
 
     res.redirect('/admin/product');
+});
+
+/******************** Product image routes *********************/
+// Delete product image
+router.post('/product/:productId/image/:imageId/delete', async (req, res) => {
+    const { productId, imageId } = req.params;
+    try {
+        //await productImageModel.deleteImageByImageId(imageId);
+        // Get the image URL to delete the file from server
+        const imagePath = await productImageModel.getImagePathByImageId(imageId);
+
+        // Remove the image file from the server if needed
+        const filePath = path.join(__dirname, '..', 'public', imagePath);
+
+        fs.unlink(filePath, (err) => {
+            if (err) console.error('Failed to delete image file:', err);
+        });
+        req.flash('success', 'Image removed successfully');
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Failed to remove image');
+    }
+    res.redirect(`/admin/product/view/${productId}`);
 });
 
 module.exports = router;

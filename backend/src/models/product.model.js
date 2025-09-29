@@ -108,7 +108,7 @@ async function updateProduct(productId, sellerId, categoryId, title, description
     return result.affectedRows > 0;
 }
 
-module.exports = { 
+module.exports = {
     createProductsTable, 
     countProducts, 
     getProducts,
